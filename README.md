@@ -22,6 +22,14 @@ To deactivate the virtual environment, run:
 deactivate
 ```
 
+## Running Tests
+
+To run the unit tests, use the following command:
+
+```bash
+python -m unittest discover -s tests
+```
+
 ## Running the API
 
 To run the API, use the following command:
