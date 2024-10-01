@@ -62,7 +62,7 @@ class PipelineTestCase(unittest.TestCase):
         self.assertIn("Missing 'command' for RUN stage", response.json["error"])
 
     def test_get_pipeline(self):
-        # First, create a pipeline
+        # Create a pipeline
         data = {
             "stages": [
                 {"type": "run", "command": "echo 'Running tests'"},
@@ -75,7 +75,7 @@ class PipelineTestCase(unittest.TestCase):
         )
         pipeline_id = create_response.json["id"]
 
-        # Now, get the pipeline
+        # Get the pipeline
         response = self.client.get(f"/pipelines/{pipeline_id}", headers=self.headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["stages"], data["stages"])
@@ -86,7 +86,7 @@ class PipelineTestCase(unittest.TestCase):
         self.assertIn("Pipeline not found", response.json["error"])
 
     def test_update_pipeline(self):
-        # First, create a pipeline
+        # Create a pipeline
         data = {
             "stages": [
                 {"type": "run", "command": "echo 'Running tests'"},
@@ -99,7 +99,7 @@ class PipelineTestCase(unittest.TestCase):
         )
         pipeline_id = create_response.json["id"]
 
-        # Now, update the pipeline
+        # Update the pipeline
         updated_data = {
             "stages": [
                 {"type": "run", "command": "echo 'Running updated tests'"},
@@ -132,7 +132,7 @@ class PipelineTestCase(unittest.TestCase):
         self.assertIn("Pipeline not found", response.json["error"])
 
     def test_delete_pipeline(self):
-        # First, create a pipeline
+        # Create a pipeline
         data = {
             "stages": [
                 {"type": "run", "command": "echo 'Running tests'"},
@@ -145,7 +145,7 @@ class PipelineTestCase(unittest.TestCase):
         )
         pipeline_id = create_response.json["id"]
 
-        # Now, delete the pipeline
+        # Delete the pipeline
         response = self.client.delete(f"/pipelines/{pipeline_id}", headers=self.headers)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json["message"], "Pipeline deleted")
@@ -156,7 +156,7 @@ class PipelineTestCase(unittest.TestCase):
         self.assertIn("Pipeline not found", response.json["error"])
 
     def test_trigger_pipeline(self):
-        # First, create a pipeline
+        # Create a pipeline
         data = {
             "stages": [
                 {"type": "run", "command": "echo 'Running tests'"},
@@ -169,7 +169,7 @@ class PipelineTestCase(unittest.TestCase):
         )
         pipeline_id = create_response.json["id"]
 
-        # Now, trigger the pipeline
+        # Trigger the pipeline
         response = self.client.post(
             f"/pipelines/{pipeline_id}/trigger", headers=self.headers
         )
