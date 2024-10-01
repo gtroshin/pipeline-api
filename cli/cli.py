@@ -2,9 +2,7 @@ import click
 import requests
 import json
 import os
-from cli.config import API_URL
-
-API_KEY = os.getenv("API_KEY")
+from cli.config import API_URL, API_KEY
 
 
 def get_headers(api_key):
