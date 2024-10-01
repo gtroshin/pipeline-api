@@ -37,7 +37,7 @@ The API will run on `http://127.0.0.1:5000`.
 ### Create a New Pipeline
 
 ```bash
-curl -X POST http://127.0.0.1:5000/pipelines -H "Content-Type: application/json" -d '{
+curl -X POST http://127.0.0.1:5000/pipelines -H "Content-Type: application/json" -H "Authorization: Bearer api_key" -d '{
     "stages": [
         {
             "type": "run",
@@ -58,7 +58,7 @@ curl -X POST http://127.0.0.1:5000/pipelines -H "Content-Type: application/json"
 ### Update an Existing Pipeline
 
 ```bash
-curl -X PUT http://127.0.0.1:5000/pipelines/1 -H "Content-Type: application/json" -d '{
+curl -X PUT http://127.0.0.1:5000/pipelines/1 -H "Content-Type: application/json" -H "Authorization: Bearer api_key" -d '{
     "stages": [
         {
             "type": "run",
@@ -79,19 +79,19 @@ curl -X PUT http://127.0.0.1:5000/pipelines/1 -H "Content-Type: application/json
 ### Retrieve an Existing Pipeline by ID
 
 ```bash
-curl -X GET http://127.0.0.1:5000/pipelines/1
+curl -X GET http://127.0.0.1:5000/pipelines/1 -H "Authorization: Bearer api_key"
 ```
 
 ### Trigger the Execution of a Pipeline
 
 ```bash
-curl -X POST http://127.0.0.1:5000/pipelines/1/trigger
+curl -X POST http://127.0.0.1:5000/pipelines/1/trigger -H "Authorization: Bearer api_key"
 ```
 
 ### Delete a Pipeline
 
 ```bash
-curl -X DELETE http://127.0.0.1:5000/pipelines/1
+curl -X DELETE http://127.0.0.1:5000/pipelines/1 -H "Authorization: Bearer api_key"
 ```
 
 ## Install `cicd-cli` CLI locally

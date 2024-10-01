@@ -6,11 +6,13 @@ from .services import (
     delete_pipeline,
     trigger_pipeline,
 )
+from . import auth
 
 bp = Blueprint("routes", __name__)
 
 
 @bp.route("/pipelines", methods=["POST"])
+@auth.login_required
 def create():
     data = request.json
     if not data:
@@ -19,6 +21,7 @@ def create():
 
 
 @bp.route("/pipelines/<int:id>", methods=["GET"])
+@auth.login_required
 def get(id):
     try:
         return get_pipeline(id)
@@ -27,6 +30,7 @@ def get(id):
 
 
 @bp.route("/pipelines/<int:id>", methods=["PUT"])
+@auth.login_required
 def update(id):
     data = request.json
     if not data:
@@ -35,6 +39,7 @@ def update(id):
 
 
 @bp.route("/pipelines/<int:id>", methods=["DELETE"])
+@auth.login_required
 def delete(id):
     try:
         return delete_pipeline(id)
@@ -43,6 +48,7 @@ def delete(id):
 
 
 @bp.route("/pipelines/<int:id>/trigger", methods=["POST"])
+@auth.login_required
 def trigger(id):
     try:
         return trigger_pipeline(id)
