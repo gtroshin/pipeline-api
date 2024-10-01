@@ -4,7 +4,7 @@ from .models import CommandType, pipelines
 
 def create_pipeline(data):
     if not isinstance(data, dict):
-        return jsonify({"error": "Invalid input format, expected JSON"}), 400
+        return jsonify({"error": "Invalid input, expected JSON"}), 400
     if "stages" not in data or not isinstance(data["stages"], list):
         return (
             jsonify(

@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from werkzeug.exceptions import BadRequest
 from .services import (
     create_pipeline,
     get_pipeline,
@@ -14,10 +15,15 @@ bp = Blueprint("routes", __name__)
 @bp.route("/pipelines", methods=["POST"])
 @auth.login_required
 def create():
-    data = request.json
-    if not data:
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"error": "Invalid input, expected JSON"}), 400
+        return create_pipeline(data)
+    except BadRequest:
         return jsonify({"error": "Invalid input, expected JSON"}), 400
-    return create_pipeline(data)
+    except Exception as e:
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 
 @bp.route("/pipelines/<int:id>", methods=["GET"])
