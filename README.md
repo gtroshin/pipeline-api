@@ -1,6 +1,7 @@
 # CI/CD Pipeline API
 ![Python 3.8.0](https://img.shields.io/badge/Python-3.8.0-green.svg)
 ![Flask 3.0.3](https://img.shields.io/badge/Flask-3.0.3-blue.svg)
+[![CI](https://github.com/gtroshin/pipeline-api/actions/workflows/ci.yml/badge.svg)](https://github.com/gtroshin/pipeline-api/actions/workflows/ci.yml)
 
 This is a simple CI/CD pipeline app built using Flask. It allows users to create, retrieve, update, delete, and trigger pipelines. This project also includes a CLI for interacting with the API.
 
