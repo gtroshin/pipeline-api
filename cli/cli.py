@@ -1,7 +1,18 @@
 import click
 import requests
 import json
-from config import API_URL
+import os
+from cli.config import API_URL
+
+API_KEY = os.getenv("API_KEY")
+
+
+def get_headers(api_key):
+    if not api_key:
+        raise click.ClickException(
+            "API key is required. Set the API_KEY environment variable or pass it as '--api-key' argument."
+        )
+    return {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
 
 @click.group()
@@ -12,9 +23,11 @@ def cli():
 
 @click.command()
 @click.argument("pipeline_id", type=int)
-def get_pipeline(pipeline_id):
+@click.option("--api-key", default=API_KEY, help="API key for authentication")
+def get_pipeline(pipeline_id, api_key):
     """Retrieve the configuration of pipeline by ID."""
-    response = requests.get(f"{API_URL}/pipelines/{pipeline_id}")
+    headers = get_headers(api_key)
+    response = requests.get(f"{API_URL}/pipelines/{pipeline_id}", headers=headers)
     if response.status_code == 200:
         click.echo(response.json())
     elif response.status_code == 404:
@@ -25,9 +38,13 @@ def get_pipeline(pipeline_id):
 
 @click.command()
 @click.argument("pipeline_id", type=int)
-def trigger_pipeline(pipeline_id):
+@click.option("--api-key", default=API_KEY, help="API key for authentication")
+def trigger_pipeline(pipeline_id, api_key):
     """Trigger the execution of a pipeline."""
-    response = requests.post(f"{API_URL}/pipelines/{pipeline_id}/trigger")
+    headers = get_headers(api_key)
+    response = requests.post(
+        f"{API_URL}/pipelines/{pipeline_id}/trigger", headers=headers
+    )
     if response.status_code == 200:
         click.echo(response.json())
     elif response.status_code == 404:
@@ -39,7 +56,8 @@ def trigger_pipeline(pipeline_id):
 @click.command()
 @click.argument("pipeline_id", type=int)
 @click.argument("pipeline_data", type=str)
-def update_pipeline(pipeline_id, pipeline_data):
+@click.option("--api-key", default=API_KEY, help="API key for authentication")
+def update_pipeline(pipeline_id, pipeline_data, api_key):
     """Update an existing pipeline configuration."""
     try:
         data = json.loads(pipeline_data)
@@ -47,7 +65,10 @@ def update_pipeline(pipeline_id, pipeline_data):
         click.echo("Error: Invalid JSON format.")
         return
 
-    response = requests.put(f"{API_URL}/pipelines/{pipeline_id}", json=data)
+    headers = get_headers(api_key)
+    response = requests.put(
+        f"{API_URL}/pipelines/{pipeline_id}", json=data, headers=headers
+    )
     if response.status_code == 200:
         click.echo(response.json())
     elif response.status_code == 404:
@@ -60,7 +81,8 @@ def update_pipeline(pipeline_id, pipeline_data):
 
 @click.command()
 @click.argument("pipeline_data", type=str)
-def create_pipeline(pipeline_data):
+@click.option("--api-key", default=API_KEY, help="API key for authentication")
+def create_pipeline(pipeline_data, api_key):
     """Create a new CI/CD pipeline configuration."""
     try:
         data = json.loads(pipeline_data)
@@ -68,7 +90,7 @@ def create_pipeline(pipeline_data):
         click.echo("Error: Invalid JSON format.")
         return
 
-    headers = {"Content-Type": "application/json"}
+    headers = get_headers(api_key)
     response = requests.post(f"{API_URL}/pipelines", json=data, headers=headers)
     if response.status_code == 201:
         click.echo(response.json())
@@ -82,9 +104,11 @@ def create_pipeline(pipeline_data):
 
 @click.command()
 @click.argument("pipeline_id", type=int)
-def delete_pipeline(pipeline_id):
+@click.option("--api-key", default=API_KEY, help="API key for authentication")
+def delete_pipeline(pipeline_id, api_key):
     """Delete a pipeline configuration."""
-    response = requests.delete(f"{API_URL}/pipelines/{pipeline_id}")
+    headers = get_headers(api_key)
+    response = requests.delete(f"{API_URL}/pipelines/{pipeline_id}", headers=headers)
     if response.status_code == 200:
         click.echo(response.json())
     elif response.status_code == 404:

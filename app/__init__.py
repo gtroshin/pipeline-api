@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_httpauth import HTTPTokenAuth
-from config import API_KEY
+from app.config import API_KEY
 
 auth = HTTPTokenAuth(scheme="Bearer")
 
