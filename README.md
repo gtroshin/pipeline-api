@@ -22,6 +22,15 @@ To deactivate the virtual environment, run:
 deactivate
 ```
 
+## Environment Variables
+
+Create a `.env` file in root directory of project and add necessary environment variables:
+
+```plaintext
+API_KEY=api_key
+API_URL=http://127.0.0.1:5000
+```
+
 ## Running Tests
 
 To run the unit tests, use the following command:
