@@ -55,6 +55,27 @@ curl -X POST http://127.0.0.1:5000/pipelines -H "Content-Type: application/json"
 }'
 ```
 
+### Update an Existing Pipeline
+
+```bash
+curl -X PUT http://127.0.0.1:5000/pipelines/1 -H "Content-Type: application/json" -d '{
+    "stages": [
+        {
+            "type": "run",
+            "command": "echo \"Running updated tests\""
+        },
+        {
+            "type": "build",
+            "dockerfile": "UpdatedDockerfile"
+        },
+        {
+            "type": "deploy",
+            "manifest": "k8s/updated_deployment.yaml"
+        }
+    ]
+}'
+```
+
 ### Retrieve an Existing Pipeline by ID
 
 ```bash
