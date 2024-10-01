@@ -93,3 +93,17 @@ curl -X POST http://127.0.0.1:5000/pipelines/1/trigger
 ```bash
 curl -X DELETE http://127.0.0.1:5000/pipelines/1
 ```
+
+## Install `cicd-cli` CLI locally
+
+```bash
+pip install -e .
+```
+
+To uninstall the CLI, run:
+
+```bash
+pip uninstall cicd-cli
+```
+
+## CLI Example Usage
