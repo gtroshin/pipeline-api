@@ -17,8 +17,13 @@ bp = Blueprint("routes", __name__)
 def create():
     try:
         data = request.json
-        if not data:
-            return jsonify({"error": "Invalid input, expected JSON"}), 400
+        if not data or "stages" not in data or not isinstance(data["stages"], list):
+            return (
+                jsonify(
+                    {"error": "Invalid pipeline configuration, 'stages' must be a list"}
+                ),
+                400,
+            )
         return create_pipeline(data)
     except BadRequest:
         return jsonify({"error": "Invalid input, expected JSON"}), 400
