@@ -24,9 +24,9 @@ deactivate
 
 ## Running the API
 
-To run the API, use the following command:  
+To run the API, use the following command:
 
-```bash 
+```bash
 python run.py
 ```
 
