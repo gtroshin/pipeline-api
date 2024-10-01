@@ -1,6 +1,8 @@
 # CI/CD Pipeline API
+![Python 3.8.0](https://img.shields.io/badge/Python-3.8.0-green.svg)
+![Flask 3.0.3](https://img.shields.io/badge/Flask-3.0.3-blue.svg)
 
-This is a simple CI/CD pipeline API built using Flask. It allows users to create, retrieve, update, delete, and trigger pipelines.
+This is a simple CI/CD pipeline app built using Flask. It allows users to create, retrieve, update, delete, and trigger pipelines. This project also includes a CLI for interacting with the API.
 
 ## Prerequisites
 
@@ -8,7 +10,7 @@ This is a simple CI/CD pipeline API built using Flask. It allows users to create
 
 ## Dependencies
 
-You can install the dependencies using pip:
+You can install the dependencies using pip (it is highly recommended to use a virtual environment):
 
 ```bash
 python -m venv venv
@@ -24,7 +26,7 @@ deactivate
 
 ## Environment Variables
 
-Create a `.env` file in root directory of project and add necessary environment variables:
+Create a `.env` file in root directory of project and add necessary environment variables (example):
 
 ```plaintext
 API_KEY=api_key
@@ -41,13 +43,13 @@ python -m unittest discover -s tests
 
 ## Running the API
 
-To run the API, use the following command:
+To run the app locally, use the following command:
 
 ```bash
 python run.py
 ```
 
-The API will run on `http://127.0.0.1:5000`.
+The app will run on `http://127.0.0.1:5000`.
 
 ## App Example Usage
 
@@ -112,6 +114,8 @@ curl -X DELETE http://127.0.0.1:5000/pipelines/1 -H "Authorization: Bearer api_k
 ```
 
 ## Install `cicd-cli` CLI locally
+
+Run the following command while at the project root to install the CLI:
 
 ```bash
 pip install -e .
