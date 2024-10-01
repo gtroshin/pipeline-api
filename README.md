@@ -107,3 +107,39 @@ pip uninstall cicd-cli
 ```
 
 ## CLI Example Usage
+
+### Show help
+
+```bash
+cicd-cli help
+```
+
+### Create a New Pipeline
+
+```bash
+cicd-cli create-pipeline '{"stages": [{"type": "run", "command": "echo \"Running tests\""}, {"type": "build", "dockerfile": "Dockerfile"}, {"type": "deploy", "manifest": "k8s/deployment.yaml"}]}'
+```
+
+### Retrieve an Existing Pipeline by ID
+
+```bash
+cicd-cli get-pipeline 1
+```
+
+### Update an Existing Pipeline
+
+```bash
+cicd-cli update-pipeline 1 '{"stages": [{"type": "run", "command": "echo \"Running updated tests\""}, {"type": "build", "dockerfile": "UpdatedDockerfile"}, {"type": "deploy", "manifest": "k8s/updated_deployment.yaml"}]}'
+```
+
+### Trigger the Execution of a Pipeline
+
+```bash
+cicd-cli trigger-pipeline 1
+```
+
+### Delete a Pipeline
+
+```bash
+cicd-cli delete-pipeline 1
+```
